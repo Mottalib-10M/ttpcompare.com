@@ -1,0 +1,28 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { LAST_UPDATED, AUTHOR_NAME, CONTACT_EMAIL, AUTHOR_ROLE, SITE_NAMES } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { organizationSchema, breadcrumbSchema, profilePageSchema } from '../../lib/seo';
+import { displayDate } from '../../lib/format';
+import { PAGES } from '../../lib/guides';
+const lang = 'en';
+const n = PAGES.length + 1;
+---
+<PageLayout title="Radif Partners, publisher of US Trusted Traveler: who we are" description="Who publishes US Trusted Traveler, where each fee and delay comes from, what the tools do with what you type, and why the site takes no applications at all." lang={lang} jsonLd={[organizationSchema(lang), profilePageSchema({ path: route('about', lang), lang }), breadcrumbSchema([{ name: 'Home', path: route('home', lang) }, { name: 'About', path: route('about', lang) }])]} breadcrumbs={[{ label: 'About' }]}>
+  <header class="mb-6"><p class="kicker">About</p><h1 class="mt-0 text-3xl font-bold text-navy-900 md:text-4xl">Who is behind {SITE_NAMES[lang]}</h1></header>
+  <div class="prose prose-slate max-w-none">
+    <div class="not-prose mb-6"><p class="text-lg font-semibold text-navy-900">{AUTHOR_NAME}</p><p class="text-navy-700">{AUTHOR_ROLE[lang]}</p></div>
+    <p>{SITE_NAMES[lang]} is published by {AUTHOR_NAME}, a company that builds free tools on public rules and published figures. This one exists for a question that four government pages and a company page answer separately: for the way I fly, which of TSA PreCheck, Global Entry, NEXUS, SENTRI and CLEAR is worth paying for, what will it really cost once a card credit and a renewal are counted, and when do I renew.</p>
+    <h2>What the site does</h2>
+    <p>The chooser turns a few answers (how often you fly, whether you cross a border, your status, your card) into a recommendation with its cost per year and per trip. The cost calculator adds up five and ten years for one person or a family, with each provider's fee, the renewal and the card credits. The renewal planner gives the dates TSA and CBP set and builds a calendar file in your browser. The checklists list the documents and steps of each route, and the other tools cover children, service members, Known Traveler Numbers, processing times and checkpoint traffic.</p>
+    <h2>Where the figures come from</h2>
+    <p>PreCheck fees by provider are read on tsa.gov; Global Entry, NEXUS and SENTRI rules on cbp.gov, in the Federal Register and on the Canada Border Services Agency site; CLEAR's price on CLEAR's own page; card credits on each issuer's own page. Each figure carries the date it was read. Checkpoint numbers are the daily totals TSA publishes. No figure comes from a blog, a forum or a comparison site. The <a href={route('method', lang)}>method page</a> explains each calculation.</p>
+    <h2>What we are not</h2>
+    <p>We are not TSA, U.S. Customs and Border Protection, the Department of Homeland Security, the Canada Border Services Agency, CLEAR or a bank. We take no application, no payment and no personal data, we have no affiliate link and no partner. You apply on the provider sites listed on tsa.gov, whose addresses end in .gov, and on ttp.dhs.gov. A site that asks you to pay it to "process" a PreCheck or Global Entry renewal is not official.</p>
+    <h2>How the site is paid for</h2>
+    <p>Nothing is sold here. If advertising is added one day, it will never sit inside a tool, and it cannot use what you type, which never leaves your browser.</p>
+    <h2>Tell us when something is wrong</h2>
+    <p>Fees change: TSA's providers adjust theirs and CBP changed its own in 2024. If a figure differs from the official page, write to <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> with the page. The <a href={route('editorial', lang)}>editorial policy</a> explains how a correction is made and dated. The site has {n} pages of tools and guides.</p>
+    <p class="text-sm text-navy-600">Fees last checked on <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time>.</p>
+  </div>
+</PageLayout>

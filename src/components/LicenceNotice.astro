@@ -1,0 +1,9 @@
+---
+/** Attributions (RECETTE §12.1). Shown at the foot of every page, embeds included. */
+interface Props { class?: string }
+const { class: cls = 'text-xs text-navy-500' } = Astro.props;
+---
+<p class={cls} data-licence-notice>
+  TSA, CBP and DHS pages and the TSA checkpoint numbers are works of the US government; no agency endorses this site. NEXUS rules quoted from the Canada Border Services Agency.
+  CLEAR, card and program names are trademarks of their owners, cited as facts with no affiliation, sponsorship or commission. Explanations and tools written by Radif Partners.
+</p>

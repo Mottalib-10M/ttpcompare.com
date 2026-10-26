@@ -1,0 +1,97 @@
+---
+/**
+ * Home (pillar page): the chooser first, then the comparison of the five programs, the cost
+ * calculator, the 2026 fees, the scam warning and every page of the site. Every fee is read from
+ * data/params-2026.json through the helpers.
+ */
+import PageLayout from '../layouts/PageLayout.astro';
+import Tool from './Tool.astro';
+import Clamp from './Clamp.astro';
+import Sources from './Sources.astro';
+import { route } from '../i18n/routes';
+import { PAGES } from '../lib/guides';
+import { GROUPS_ORDER, groupLabel } from '../i18n/nav';
+import { helpers } from '../lib/helpers';
+import { LAST_UPDATED, AUTHOR_NAME } from '../data/site-config';
+import { displayDate } from '../lib/format';
+import { faqSchema, webApplicationSchema, websiteSchema, organizationSchema } from '../lib/seo';
+import { t } from '../i18n/ui';
+const lang = 'en';
+const h = helpers(lang, true);
+const P = h.P;
+const ui = t(lang);
+const cards = (g: (typeof GROUPS_ORDER)[number]) => PAGES.filter((p) => p.group === g).map((p) => ({ href: route(p.id, lang), name: p.en.nav, text: p.en.card }));
+const pre = h.cheapestEnroll();
+const ren = h.cheapestRenewal();
+const telos = h.provider('telos'), idemia = h.provider('idemia'), clr = h.provider('clear');
+
+const title = 'TSA PreCheck, Global Entry or CLEAR: Which One to Get';
+const description = 'Pick TSA PreCheck, Global Entry, NEXUS or CLEAR from the way you fly: the cost per year and per trip after card credits, renewal dates and interview options.';
+const faqs = [
+  { q: 'Is Global Entry worth it if I only fly abroad once or twice a year?', a: `Usually yes, if you hold a passport. Global Entry costs ${h.m(P.globalEntry.fee)} for five years and includes TSA PreCheck, while PreCheck alone starts at ${h.m(pre.enroll)}. The difference is ${h.m(P.globalEntry.fee - pre.enroll)} over five years, less than the cost of one long line at customs for many travelers. TSA itself points to Global Entry from four trips abroad a year, but that advice predates most card credits.` },
+  { q: 'Do I need both TSA PreCheck and Global Entry?', a: `No. Global Entry, NEXUS and SENTRI members get TSA PreCheck by entering their nine-digit PASS ID as Known Traveler Number. Buying PreCheck as well only makes sense in one case: you need the faster security lane now and cannot reach a Global Entry interview soon. Two memberships mean two renewals to track and two Known Traveler Numbers to keep apart.` },
+  { q: 'Does CLEAR replace TSA PreCheck?', a: `No. CLEAR+ checks your identity with your face or fingerprints and walks you past the ID line, at ${h.m(P.clear.annual)} a year. You then go through the screening lane your boarding pass allows. Without PreCheck that is the standard lane, shoes and laptop out. With both, you skip the ID line and get the lighter screening. CLEAR does not replace Global Entry at customs either.` },
+  { q: 'Which credit cards pay for Global Entry or TSA PreCheck?', a: `TSA lists ${P.tsaCardListCount} credit cards that give a statement credit toward the PreCheck fee, with any of its three providers, and most of them also cover Global Entry. The credit is usually up to ${h.m(120)} once every four years, charged to the card. Some cards cover only ${h.m(100)}, which leaves part of the Global Entry fee to pay. Check your own card's benefit page before you apply.` },
+  { q: 'When should I renew TSA PreCheck or Global Entry?', a: `As early as the window allows, since the new term starts when the old one ends. PreCheck renews online from ${P.precheck.renewOnlineMonthsBefore} months before expiry, and TSA advises finishing ${P.precheck.renewAdviseDaysBefore} days before it. Global Entry renews from ${P.globalEntry.renewMonthsBefore} months before; filed before expiry, it keeps your benefits up to ${P.globalEntry.graceMonths} months while CBP reviews. The renewal planner above puts both dates in your calendar.` },
+  { q: 'Is this site part of TSA, CBP or CLEAR?', a: `No. It is an independent site published by ${AUTHOR_NAME}. It takes no application, no payment and no personal data. You apply for PreCheck only on the provider sites listed on tsa.gov, whose addresses end in .gov, and for Global Entry, NEXUS and SENTRI only on ttp.dhs.gov. Sites that charge extra to renew for you are not official.` },
+];
+const jsonLd = [websiteSchema(lang), organizationSchema(lang), webApplicationSchema({ name: 'Which trusted traveler program should I get?', description, path: route('home', lang), lang }), faqSchema(faqs, lang)];
+const resume = `TSA PreCheck, Global Entry, NEXUS, SENTRI and CLEAR+ answer three different lines at the airport. PreCheck shortens the security screening when you leave a US airport: you keep your shoes, belt, light jacket, laptop and liquids, and TSA says about ${h.pc(P.precheck.waitShare)} of PreCheck passengers wait less than ${P.precheck.waitMinutes} minutes. It costs ${h.m(idemia.enroll)} with IDEMIA, ${h.m(clr.enroll)} with CLEAR and ${h.m(telos.enroll)} with Telos for five years. Global Entry speeds up customs when you fly back into the country and includes PreCheck, for ${h.m(P.globalEntry.fee)} over five years. NEXUS does the same for the Canadian border and adds Canada's own lanes, and SENTRI covers land crossings from Mexico, both at ${h.m(P.nexus.fee)}. CLEAR+, a private company, only replaces the ID check, for ${h.m(P.clear.annual)} a year. For most travelers who leave the country even once a year and hold a passport, Global Entry is the better buy; a card that refunds ${h.m(120)} makes it free.`;
+const cmpRows = [
+  ['TSA PreCheck', `${h.m(pre.enroll)}–${h.m(telos.enroll)}`, '5 years', 'Security lane in US airports', 'US citizens, US nationals, permanent residents', 'about 10 minutes in person, no interview'],
+  ['Global Entry', h.m(P.globalEntry.fee), '5 years', 'Customs kiosks on return + PreCheck', 'US citizens and residents, Mexican nationals, partner countries', 'CBP interview (center or on arrival)'],
+  ['NEXUS', h.m(P.nexus.fee), '5 years', 'Canada and US lanes, kiosks + PreCheck', 'US and Canadian citizens and residents', 'US and Canadian officers'],
+  ['SENTRI', h.m(P.sentri.fee), '5 years', 'Mexico land lanes + PreCheck', 'any nationality', 'CBP interview, vehicle check'],
+  ['CLEAR+', `${h.m(P.clear.annual)} a year`, 'yearly', 'Skips the ID check line', 'set by the company', 'enroll at a CLEAR airport'],
+];
+const feeRows = h.PROVIDERS.map((p) => [p.name, h.m(p.enroll), h.m(p.renewOnline), h.m(p.renewInPerson), h.num(p.locations)]);
+---
+<PageLayout title={title} description={description} lang={lang} jsonLd={jsonLd} faqs={faqs} breadcrumbs={[]}>
+  <header class="mb-3">
+    <h1 class="mt-0 text-[1.75rem] font-bold text-navy-900 max-sm:leading-tight sm:text-3xl md:text-4xl">TSA PreCheck, Global Entry, NEXUS or CLEAR: which one should you get?</h1>
+    <p class="mt-1 text-xs font-medium text-navy-600" data-independant>{ui.independent}</p>
+    <p class="mt-2 text-base text-navy-700 sm:text-lg">Tell us how you fly: the tool picks the program and gives what it costs you per year and per trip.</p>
+  </header>
+  <div data-outil class="mb-4"><Tool tool={{ kind: 'chooser' }} primary={true} seedKey="home" /></div>
+  <Clamp text={resume} id="clamp-home" lang={lang} class="mb-3" />
+  <p class="mb-8 text-sm text-navy-600">Fees checked on <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time> · {AUTHOR_NAME} · <a href={route('method', lang)} class="underline hover:text-navy-900">How the costs are added up</a> · <a href={route('about', lang)} class="underline hover:text-navy-900">About this site</a></p>
+
+  <div class="prose prose-slate max-w-none">
+    <h2>Five programs, three lines at the airport</h2>
+    <p>The first line is security, run by TSA, when you leave from a US airport: PreCheck makes it shorter and lighter. The second is customs and immigration, run by CBP, when you come back from abroad: Global Entry, NEXUS and SENTRI make it a kiosk or a dedicated lane. The third is the identity check at the start of the security line, where CLEAR+ members use a pod or an eGate instead of handing over an ID. The CBP programs include PreCheck; nothing includes CLEAR.</p>
+    <Fragment set:html={h.table(['Program', 'Fee', 'Lasts', 'What you get', 'Who can apply', 'Interview'], cmpRows, `Fees read on tsa.gov, cbp.gov and CLEAR’s price page on ${h.read}. Children: see the families page.`, ['l', 'l', 'l', 'l', 'l', 'l'])} />
+    <p>Eligibility decides before price does. PreCheck is open only to {P.precheck.eligible}. Global Entry adds Mexican nationals and the citizens of {P.globalEntry.countries.length} partner countries, from Argentina to the United Kingdom, each with checks by their own government. NEXUS takes US and Canadian citizens and permanent residents, and SENTRI has no citizenship requirement at all. A Canadian citizen therefore gets PreCheck only through NEXUS.</p>
+
+    <h2>What it really costs over five and ten years</h2>
+    <p>Sticker prices hide three things: the renewal, which for PreCheck is cheaper than the first enrollment; the card credit, which many travel cards pay once every four years; and the family, since children under 18 pay nothing for Global Entry, NEXUS or SENTRI when a parent is a member, and need no PreCheck of their own when they fly with you. The calculator adds all three. Two numbers frame most decisions: Global Entry costs {h.m(P.globalEntry.fee - pre.enroll)} more than the cheapest PreCheck at enrollment and {h.m(P.globalEntry.fee - ren.amount)} more at renewal, and CLEAR+ costs {h.m(P.clear.annual * 5)} over five years for one person.</p>
+  </div>
+  <div class="mb-6"><Tool tool={{ kind: 'cost', props: { program: 'globalEntry' } }} idPrefix="h1" /></div>
+  <div class="prose prose-slate max-w-none">
+    <p>A card credit only works if the fee is charged to that card, and only once per period: if your card already paid for a family member's application two years ago, yours waits. The <Fragment set:html={h.a('credit-cards-that-pay-for-global-entry', 'card credits page')} /> gives the amounts five issuers publish and what each leaves you to pay.</p>
+
+    <h2>TSA PreCheck fees by provider, 2026</h2>
+    <p>Three companies enroll travelers for TSA: IDEMIA, Telos and CLEAR. They sell the same five-year membership and the same Known Traveler Number format, with their own prefix. Prices differ, and the cheapest company for a first enrollment is not the cheapest at renewal, because each sets online and in-person prices separately.</p>
+    <Fragment set:html={h.table(['Provider', 'Enrollment', 'Renewal online', 'Renewal in person', 'Locations'], feeRows, `TSA PreCheck page, read on ${h.read}. TSA headline: “five years of benefits for $85 or less”.`, ['l', 'r', 'r', 'r', 'r'])} />
+    <p>Renewing online with IDEMIA or in person with Telos is the cheapest route at {h.m(ren.amount)}. CLEAR's enrollment comes with a one-time code that lowers the first CLEAR+ year to {h.m(P.precheck.clearPlusCodeNew)}, which only matters if you wanted CLEAR+ anyway. The full comparison is on the <Fragment set:html={h.a('tsa-precheck-cost', 'PreCheck cost page')} />.</p>
+
+    <h2>Renew on a .gov site, never through a paid helper</h2>
+    <p>Searching for a renewal brings up sites that look official, ask for your Known Traveler Number and passport details, and charge a fee to "process" the renewal on top of the real price. TSA's position is plain: a website to register for PreCheck whose address does not end in .gov is not an official TSA PreCheck website, and TSA does not refund money paid to such sites. The official provider sites are {h.PROVIDERS.map((p) => p.site).join(', ')}; Global Entry, NEXUS and SENTRI renew on ttp.dhs.gov only. If you paid a fake site, report it to your bank and on {h.src('ftc-fraud', 'ReportFraud.ftc.gov')}.</p>
+  </div>
+  <div class="mb-6"><Tool tool={{ kind: 'renewal', props: { program: 'precheck' } }} idPrefix="h2" /></div>
+  <div class="prose prose-slate max-w-none">
+    <h2>Interviews: where and how long</h2>
+    <p>PreCheck has no interview, only a visit of about {P.precheck.inPersonMinutes} minutes for fingerprints, photo and documents. Global Entry has a CBP interview after conditional approval: at an enrollment center, or on arrival from abroad at one of the airports CBP lists for Enrollment on Arrival, with no appointment. A renewal may be done by video in CBP's remote interview pilot. The <Fragment set:html={h.a('global-entry-interview', 'interview page')} /> covers the questions and the documents, and the <Fragment set:html={h.a('enrollment-on-arrival', 'Enrollment on Arrival page')} /> lists the airports.</p>
+
+    <h2>Every page of the site</h2>
+  </div>
+  <div class="not-prose grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-sommaire>
+    {GROUPS_ORDER.map((g) => (
+      <section><h3 class="mb-2 text-lg font-semibold text-navy-900">{groupLabel(g)}</h3><ul class="space-y-2 text-sm">{cards(g).map((c) => <li><a href={c.href} class="font-medium text-accent-700 underline">{c.name}</a><span class="block text-navy-700">{c.text}</span></li>)}</ul></section>
+    ))}
+  </div>
+  <div class="prose prose-slate mt-8 max-w-none">
+    <h2>How this site works</h2>
+    <p>Fees, durations and rules come from one data file, read on the TSA, CBP, CBSA and DHS pages, CLEAR's price page and the issuers' benefit pages, each with its date. The tools run in your browser: nothing you type is sent or stored. The site takes no application, sells nothing and earns no commission. The <a href={route('method', lang)}>method page</a> explains each calculation.</p>
+    <Sources lang={lang} keys={['tsa-precheck', 'tsa-renew', 'tsa-faq', 'cbp-ge-eligibility', 'cbp-ge-apply', 'cbp-fees', 'cbsa-nexus', 'cbp-sentri', 'clear-plus']} />
+  </div>
+</PageLayout>

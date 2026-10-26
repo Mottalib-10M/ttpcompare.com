@@ -1,0 +1,32 @@
+---
+/**
+ * Renders one tool with its page defaults: `chooser` (props: domestic, international, canadaLand,
+ * mexicoLand, status, military, card), `cost` (props: program, credit, adults, kids), `renewal`
+ * (props: program), `checklist` (props: route), `ktn`, or `mini:<spec>` from `lib/mini-specs.ts`.
+ */
+import Chooser from './calc/Chooser';
+import CostCalc from './calc/CostCalc';
+import RenewalPlanner from './calc/RenewalPlanner';
+import Checklist from './calc/Checklist';
+import KtnDecoder from './calc/KtnDecoder';
+import MiniSim from './calc/MiniSim';
+import { route, hasRoute, type Locale } from '../i18n/routes';
+import { getSpec } from '../lib/mini-specs';
+import type { ToolDef } from '../lib/guide-types';
+interface Props { tool: ToolDef; lang?: Locale; primary?: boolean; idPrefix?: string; seedKey?: string }
+const { tool, lang = 'en', primary = false, idPrefix } = Astro.props;
+const props = (tool.props ?? {}) as Record<string, any>;
+const kind = tool.kind;
+const mini = kind.startsWith('mini:') ? kind.slice(5) : null;
+const spec = mini ? getSpec(mini) : null;
+const href = spec?.ctaPage && hasRoute(spec.ctaPage, lang) ? route(spec.ctaPage, lang) : undefined;
+const numDefaults: Record<string, number> = {};
+for (const [k, v] of Object.entries(props)) if (typeof v === 'number') numDefaults[k] = v;
+const pre = idPrefix ?? (primary ? 'p' : 'm');
+---
+{kind === 'chooser' && <Chooser client:load idPrefix={`${pre}-ch`} primary={primary} {...props} />}
+{kind === 'cost' && <CostCalc client:load idPrefix={`${pre}-cost`} primary={primary} {...props} />}
+{kind === 'renewal' && <RenewalPlanner client:load idPrefix={`${pre}-ren`} primary={primary} {...props} />}
+{kind === 'checklist' && <Checklist client:load idPrefix={`${pre}-chk`} primary={primary} {...props} />}
+{kind === 'ktn' && <KtnDecoder client:load idPrefix={`${pre}-ktn`} primary={primary} />}
+{mini && <MiniSim client:load kind={mini} href={href} defaults={numDefaults} primary={primary} idPrefix={pre} />}

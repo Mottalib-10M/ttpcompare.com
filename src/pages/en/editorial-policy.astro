@@ -1,0 +1,26 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { AUTHOR_NAME, CONTACT_EMAIL, LAST_UPDATED, SITE_NAMES } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { displayDate } from '../../lib/format';
+const lang = 'en';
+---
+<PageLayout title={`Editorial policy of ${SITE_NAMES[lang]}: sources and corrections`} description="Which TSA, CBP, CBSA, DHS, CLEAR and card issuer pages US Trusted Traveler relies on, how every fee is dated, which sources it refuses and how a mistake is fixed." lang={lang} noindex={true} breadcrumbs={[{ label: 'Editorial policy' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Editorial and corrections policy</h1>
+    <p>People use these pages to decide which program to pay for and when to renew. A fee that is out of date costs money, and a renewal date that is wrong can cost a lane at the airport, so every fee, duration and delay points back to the page it was read on, with the day it was read.</p>
+    <h2>Who is responsible</h2><p>{AUTHOR_NAME}, reachable at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    <h2>What we read</h2>
+    <ul>
+      <li>tsa.gov for TSA PreCheck: fees of each enrollment provider, renewal, Known Traveler Numbers, families, service members, card offers and checkpoint numbers;</li>
+      <li>cbp.gov, ttp.dhs.gov and the Federal Register for Global Entry, NEXUS and SENTRI: fees, eligibility, interviews, Enrollment on Arrival, renewal and denials; dhs.gov for DHS TRIP;</li>
+      <li>the Canada Border Services Agency for the Canadian side of NEXUS;</li>
+      <li>CLEAR's own price page and each card issuer's own benefit page, quoted as facts with their date and never linked for a commission.</li>
+    </ul>
+    <h2>Sources we refuse</h2><p>Blogs, forums, news articles and comparison sites never supply a figure here, even when they are right. When no official figure exists, as for waiting times at a given airport, the page says so instead of estimating one.</p>
+    <h2>Review cycle</h2><p>The official pages are re-read every month by a script that reports any sentence that changed, and by a person whenever an agency announces a change. A change announced for a later date is shown with that date, never as current before it.</p>
+    <h2>Corrections</h2>
+    <ol><li>We open the official page again.</li><li>We correct the data file and its reading date, and add a test when a calculation is involved.</li><li>The site rebuilds and every page shows the new date.</li></ol>
+    <h2>Independence</h2><p>No agency, company or bank pays for or reviews what is published here, and the site carries no affiliate link. See also the <a href={route('method', lang)}>method page</a>. Version of <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time>.</p>
+  </div>
+</PageLayout>

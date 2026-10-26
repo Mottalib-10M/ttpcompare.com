@@ -1,0 +1,23 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import LegalIdentity from '../../components/LegalIdentity.astro';
+import { CONTACT_EMAIL, LAST_UPDATED, SITE_NAMES } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { displayDate } from '../../lib/format';
+const lang = 'en';
+---
+<PageLayout title={`Contact ${SITE_NAMES[lang]}: a fee, a date, the chooser`} description="Write to US Trusted Traveler when a TSA, CBP or CLEAR fee changes, when a page seems wrong, or to embed the chooser or the cost calculator on a travel site." lang={lang} noindex={true} breadcrumbs={[{ label: 'Contact' }]} showAuthor={false}>
+  <div class="prose prose-slate max-w-none">
+    <h1>Contact</h1>
+    <p>Email: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. A person reads every message.</p>
+    <h2>A fee or a rule changed</h2>
+    <p>Send the address of the official page that shows the new figure. We read it, update the data file, and the new reading date appears on every page that uses it.</p>
+    <h2>What we cannot do</h2>
+    <p>We are not TSA, CBP, CLEAR or a card issuer. We cannot check an application, book an interview, refund a fee or tell you why an application was denied. Please never send a Known Traveler Number, a PASS ID, a passport number or any personal document.</p>
+    <h2>Using a tool on your own site</h2>
+    <p>Travel guides, employers and community groups can show the chooser or the cost calculator in an iframe at no cost: see the <a href={route('widget', lang)}>embed page</a>.</p>
+    <h2>Publisher</h2>
+    <LegalIdentity lang={lang} />
+    <p>Updated on <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time>.</p>
+  </div>
+</PageLayout>

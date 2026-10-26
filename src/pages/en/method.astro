@@ -1,0 +1,37 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { LAST_UPDATED } from '../../data/site-config';
+import { route } from '../../i18n/routes';
+import { breadcrumbSchema, articleSchema } from '../../lib/seo';
+import { helpers } from '../../lib/helpers';
+import { displayDate } from '../../lib/format';
+const lang = 'en';
+const h = helpers(lang);
+const P = h.P;
+const rows = Object.values(P.sources).map((s) => [s.label.en, new URL(s.url).hostname.replace('www.', '')]);
+---
+<PageLayout title="Method of US Trusted Traveler: fees, credits, renewal dates" description="How US Trusted Traveler reads the TSA, CBP and CBSA fees, adds up five and ten years with card credits, picks a program for your trips and dates your renewal." lang={lang} jsonLd={[articleSchema({ title: 'How the fees are read and the costs added up', description: 'Method of US Trusted Traveler', path: route('method', lang), lang }), breadcrumbSchema([{ name: 'Home', path: route('home', lang) }, { name: 'Method', path: route('method', lang) }])]} breadcrumbs={[{ label: 'Method' }]}>
+  <header class="mb-6"><p class="kicker">Method</p><h1 class="mt-0 text-3xl font-bold text-navy-900 md:text-4xl">How the fees are read and the costs added up</h1></header>
+  <div class="prose prose-slate max-w-none">
+    <p>Every tool and every page reads one data file of fees, durations and rules, each tied to the official page it was read on and the date ({h.read}). No fee is typed into a page. Automated tests run each calculation on cases worked out by hand from those figures, and a script re-reads the official pages to report any sentence that changed.</p>
+    <h2>1. Five and ten years</h2>
+    <p>Five years is one membership: the enrollment fee of TSA PreCheck at the provider you choose, or the {h.m(P.globalEntry.fee)} fee of Global Entry, NEXUS or SENTRI. Ten years adds one renewal at year five: for PreCheck, the online or in-person renewal price of the provider; for the CBP programs, the same {h.m(P.globalEntry.fee)}. CLEAR+ is counted every year at {h.m(P.clear.annual)}, plus {h.m(P.clear.familyAdd)} for each added adult (three at most). When you take PreCheck through CLEAR, the first CLEAR+ year is counted at the code price TSA quotes ({h.m(P.precheck.clearPlusCodeNew)} for a new enrollment, {h.m(P.precheck.clearPlusCodeRenew)} at an online renewal).</p>
+    <h2>2. Card credits</h2>
+    <p>A credit "once every four years" is applied to a payment when four years have passed since the last payment it covered, so an enrollment at year zero and a renewal at year five are both covered if you hold the card all along. The credit never exceeds the fee: an {h.m(85)} PreCheck credit on a {h.m(79.75)} fee refunds {h.m(79.75)}. Credits are per cardholder; authorized users get one only where the issuer says so. A CLEAR+ credit is counted each calendar year up to the price paid.</p>
+    <h2>3. The chooser</h2>
+    <p>The chooser checks eligibility first (PreCheck: {P.precheck.eligible}; Global Entry: the same plus Mexican nationals and the partner countries CBP lists; NEXUS: US and Canadian citizens and permanent residents; SENTRI: no citizenship requirement). It then picks NEXUS for frequent land or sea crossings from Canada, Global Entry when you come back from abroad by air or cross from Mexico and hold a passport, and TSA PreCheck otherwise. A card that refunds {h.m(P.globalEntry.fee)} makes Global Entry cost the same as PreCheck, so it wins whenever you have a passport. CLEAR+ is added only when your card pays for it or when you fly at least twelve round trips a year from an airport that may have CLEAR lanes. The cost per round trip is the yearly cost divided by your round trips. TSA's own advice is Global Entry from four international trips a year; our arithmetic shows why fewer trips can justify it: the gap is {h.m(P.globalEntry.fee - h.cheapestEnroll().enroll)} over five years.</p>
+    <h2>4. Renewal dates</h2>
+    <p>TSA PreCheck: online renewal from six months before expiry, renewal advised at least 60 days before, reminders sent by the providers at six months, three months, one month and two weeks. Global Entry, NEXUS and SENTRI: renewal from one year before expiry; a renewal filed before expiry keeps the benefits up to 24 months after the expiration date. The calendar file follows the iCalendar standard and is built in your browser.</p>
+    <h2>5. Checkpoint numbers</h2>
+    <p>TSA publishes the number of people screened each day at its checkpoints, nationwide. It does not publish waiting times per airport on that page. The site uses those daily totals only to compare one day with another; it never turns them into minutes.</p>
+    <h2>6. Pages read</h2>
+    <Fragment set:html={h.table(['Page', 'Site'], rows, `Read on ${h.read}.`, ['l', 'l'])} />
+    <h2>7. What the site does not do</h2>
+    <ul>
+      <li>It does not take or forward any application, payment or document.</li>
+      <li>It does not promise an approval, a lane or a waiting time: TSA and CBP decide, and no one is guaranteed expedited screening.</li>
+      <li>It keeps nothing you type: the tools run in your browser.</li>
+    </ul>
+    <p>Method version of <time datetime={LAST_UPDATED}>{displayDate(LAST_UPDATED, 'en-US')}</time>. A figure that looks wrong: <a href={route('contact', lang)}>contact</a>.</p>
+  </div>
+</PageLayout>

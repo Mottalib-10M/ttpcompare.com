@@ -1,0 +1,345 @@
+{
+ "_source": "https://www.cbp.gov/travel/trusted-traveler-programs/global-entry/enrollment-arrival",
+ "_note": "List of the CBP Enrollment on Arrival page read on 2026-10-26 (page last modified January 29, 2026). Airports as CBP lists them; IATA codes added by us (CBP prints DIA, OIA, XKF, IDW, INN for Denver, Ontario, Bermuda, Dublin, Shannon). Abroad = CBP Preclearance or territories CBP lists under International Locations.",
+ "read": "2026-10-26",
+ "pageModified": "2026-01-29",
+ "us": [
+  {
+   "code": "ANC",
+   "name": "Anchorage (Ted Stevens)",
+   "state": "AK"
+  },
+  {
+   "code": "FAI",
+   "name": "Fairbanks",
+   "state": "AK"
+  },
+  {
+   "code": "PHX",
+   "name": "Phoenix Sky Harbor",
+   "state": "AZ"
+  },
+  {
+   "code": "LAX",
+   "name": "Los Angeles",
+   "state": "CA"
+  },
+  {
+   "code": "SJC",
+   "name": "San Jose (Norman Y. Mineta)",
+   "state": "CA"
+  },
+  {
+   "code": "OAK",
+   "name": "Oakland",
+   "state": "CA"
+  },
+  {
+   "code": "ONT",
+   "name": "Ontario",
+   "state": "CA"
+  },
+  {
+   "code": "SMF",
+   "name": "Sacramento",
+   "state": "CA"
+  },
+  {
+   "code": "SAN",
+   "name": "San Diego",
+   "state": "CA"
+  },
+  {
+   "code": "SFO",
+   "name": "San Francisco",
+   "state": "CA"
+  },
+  {
+   "code": "FAT",
+   "name": "Fresno Yosemite",
+   "state": "CA"
+  },
+  {
+   "code": "DEN",
+   "name": "Denver",
+   "state": "CO"
+  },
+  {
+   "code": "FLL",
+   "name": "Fort Lauderdale-Hollywood",
+   "state": "FL"
+  },
+  {
+   "code": "MIA",
+   "name": "Miami",
+   "state": "FL"
+  },
+  {
+   "code": "MCO",
+   "name": "Orlando",
+   "state": "FL"
+  },
+  {
+   "code": "SFB",
+   "name": "Orlando Sanford",
+   "state": "FL"
+  },
+  {
+   "code": "TPA",
+   "name": "Tampa",
+   "state": "FL"
+  },
+  {
+   "code": "ATL",
+   "name": "Atlanta (Hartsfield-Jackson)",
+   "state": "GA"
+  },
+  {
+   "code": "HNL",
+   "name": "Honolulu",
+   "state": "HI"
+  },
+  {
+   "code": "MDW",
+   "name": "Chicago Midway",
+   "state": "IL"
+  },
+  {
+   "code": "ORD",
+   "name": "Chicago O'Hare",
+   "state": "IL"
+  },
+  {
+   "code": "IND",
+   "name": "Indianapolis",
+   "state": "IN"
+  },
+  {
+   "code": "CVG",
+   "name": "Cincinnati/Northern Kentucky",
+   "state": "KY"
+  },
+  {
+   "code": "MSY",
+   "name": "New Orleans (Louis Armstrong)",
+   "state": "LA"
+  },
+  {
+   "code": "BWI",
+   "name": "Baltimore-Washington",
+   "state": "MD"
+  },
+  {
+   "code": "BOS",
+   "name": "Boston Logan",
+   "state": "MA"
+  },
+  {
+   "code": "DTW",
+   "name": "Detroit Metropolitan",
+   "state": "MI"
+  },
+  {
+   "code": "MSP",
+   "name": "Minneapolis-Saint Paul",
+   "state": "MN"
+  },
+  {
+   "code": "MCI",
+   "name": "Kansas City",
+   "state": "MO"
+  },
+  {
+   "code": "STL",
+   "name": "St. Louis Lambert",
+   "state": "MO"
+  },
+  {
+   "code": "EWR",
+   "name": "Newark Liberty",
+   "state": "NJ"
+  },
+  {
+   "code": "BUF",
+   "name": "Buffalo Niagara",
+   "state": "NY"
+  },
+  {
+   "code": "JFK",
+   "name": "New York JFK",
+   "state": "NY"
+  },
+  {
+   "code": "LAS",
+   "name": "Las Vegas (Harry Reid)",
+   "state": "NV"
+  },
+  {
+   "code": "RNO",
+   "name": "Reno-Tahoe",
+   "state": "NV"
+  },
+  {
+   "code": "CLT",
+   "name": "Charlotte Douglas",
+   "state": "NC"
+  },
+  {
+   "code": "RDU",
+   "name": "Raleigh-Durham",
+   "state": "NC"
+  },
+  {
+   "code": "CMH",
+   "name": "Columbus (John Glenn)",
+   "state": "OH"
+  },
+  {
+   "code": "CLE",
+   "name": "Cleveland Hopkins",
+   "state": "OH"
+  },
+  {
+   "code": "PDX",
+   "name": "Portland",
+   "state": "OR"
+  },
+  {
+   "code": "PHL",
+   "name": "Philadelphia",
+   "state": "PA"
+  },
+  {
+   "code": "PIT",
+   "name": "Pittsburgh",
+   "state": "PA"
+  },
+  {
+   "code": "AUS",
+   "name": "Austin-Bergstrom",
+   "state": "TX"
+  },
+  {
+   "code": "DFW",
+   "name": "Dallas-Fort Worth",
+   "state": "TX"
+  },
+  {
+   "code": "IAH",
+   "name": "Houston George Bush Intercontinental",
+   "state": "TX"
+  },
+  {
+   "code": "SAT",
+   "name": "San Antonio",
+   "state": "TX"
+  },
+  {
+   "code": "HOU",
+   "name": "Houston Hobby",
+   "state": "TX"
+  },
+  {
+   "code": "SLC",
+   "name": "Salt Lake City",
+   "state": "UT"
+  },
+  {
+   "code": "IAD",
+   "name": "Washington Dulles",
+   "state": "VA"
+  },
+  {
+   "code": "SEA",
+   "name": "Seattle-Tacoma",
+   "state": "WA"
+  },
+  {
+   "code": "MKE",
+   "name": "Milwaukee (General Mitchell)",
+   "state": "WI"
+  }
+ ],
+ "abroad": [
+  {
+   "code": "AUA",
+   "name": "Aruba (Queen Beatrix)",
+   "country": "Aruba"
+  },
+  {
+   "code": "BDA",
+   "name": "Bermuda (L.F. Wade)",
+   "country": "Bermuda"
+  },
+  {
+   "code": "YYC",
+   "name": "Calgary",
+   "country": "Canada"
+  },
+  {
+   "code": "YEG",
+   "name": "Edmonton",
+   "country": "Canada"
+  },
+  {
+   "code": "YHZ",
+   "name": "Halifax Stanfield",
+   "country": "Canada"
+  },
+  {
+   "code": "YUL",
+   "name": "Montreal-Trudeau",
+   "country": "Canada"
+  },
+  {
+   "code": "YOW",
+   "name": "Ottawa",
+   "country": "Canada"
+  },
+  {
+   "code": "YWG",
+   "name": "Winnipeg",
+   "country": "Canada"
+  },
+  {
+   "code": "YYZ",
+   "name": "Toronto Pearson",
+   "country": "Canada"
+  },
+  {
+   "code": "YVR",
+   "name": "Vancouver",
+   "country": "Canada"
+  },
+  {
+   "code": "GUM",
+   "name": "Guam",
+   "country": "Guam"
+  },
+  {
+   "code": "DUB",
+   "name": "Dublin",
+   "country": "Ireland"
+  },
+  {
+   "code": "SNN",
+   "name": "Shannon",
+   "country": "Ireland"
+  },
+  {
+   "code": "NAS",
+   "name": "Nassau (Lynden Pindling)",
+   "country": "Bahamas"
+  },
+  {
+   "code": "SPN",
+   "name": "Saipan",
+   "country": "Northern Mariana Islands"
+  },
+  {
+   "code": "AUH",
+   "name": "Abu Dhabi",
+   "country": "United Arab Emirates"
+  }
+ ]
+}
