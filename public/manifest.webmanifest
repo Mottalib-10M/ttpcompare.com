@@ -1,6 +1,6 @@
 {
- "name": "US Trusted Traveler",
- "short_name": "US Trusted Traveler",
+ "name": "TTP Compare",
+ "short_name": "TTP Compare",
  "description": "Choose between TSA PreCheck, Global Entry, CLEAR and NEXUS from the way you fly: real cost over five and ten years after card credits, renewal windows and interview options.",
  "start_url": "/en/",
  "display": "standalone",

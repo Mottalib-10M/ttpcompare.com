@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /*?*
 
-Sitemap: https://us-trusted-traveler.example/sitemap-index.xml
+Sitemap: https://ttpcompare.com/sitemap-index.xml

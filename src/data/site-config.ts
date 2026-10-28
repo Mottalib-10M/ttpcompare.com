@@ -1,6 +1,6 @@
 /** Configuration centrale du site (générée par new-site.py). */
-export const SITE_URL = "https://us-trusted-traveler.example";
-export const SITE_NAMES: Record<string, string> = {"en": "US Trusted Traveler"};
+export const SITE_URL = "https://ttpcompare.com";
+export const SITE_NAMES: Record<string, string> = {"en": "TTP Compare"};
 // Partie du nom affichée en couleur dans l'en-tête (RECETTE §10.3), « » pour aucune.
 export const BRAND_ACCENT = "";
 export const LANG_TAGS: Record<string, string> = {"en": "en-US"};
@@ -18,7 +18,7 @@ export const AUTHOR_DESC: Record<string, string> = {"en": "Radif Partners reads 
  *  themes reellement traites par le site, pas une liste de mots-cles : un sujet
  *  declare ici sans page qui le couvre est une declaration fausse. */
 export const KNOWS_ABOUT: Record<string, string[]> = {"en": ["TSA PreCheck enrollment and renewal fees by enrollment provider", "Global Entry application, interview and Enrollment on Arrival", "NEXUS and SENTRI trusted traveler programs", "CLEAR Plus membership", "Known Traveler Numbers and PASS IDs", "Credit card statement credits for trusted traveler application fees"]};
-export const CONTACT_EMAIL = "contact@us-trusted-traveler.example";
+export const CONTACT_EMAIL = "contact@ttpcompare.com";
 export const THEME_COLOR = '#1F4E79';
 export const LOGO_SYMBOL = 'KTN';
 export const BING_VERIFY_CODE = '';
